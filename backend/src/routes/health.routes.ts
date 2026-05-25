@@ -1,20 +1,20 @@
 import { Router, type Request, type Response } from "express";
+import { isDBHealthy } from "@/config/db";
 
 const router = Router();
 
-/**
- * GET /api/health
- * Liveness probe — used by:
- *   - Frontend during dev to confirm backend is reachable
- *   - Railway/Render to determine if the service is healthy
- *   - Uptime monitors (Phase 9)
- */
+
 router.get("/", (_req: Request, res: Response) => {
-  res.status(200).json({
-    status: "ok",
+  const dbHealthy = isDBHealthy();
+
+  res.status(dbHealthy ? 200 : 503).json({
+    status: dbHealthy ? "ok" : "degraded",
     service: "queenbee-api",
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
+    dependencies: {
+      database: dbHealthy ? "ok" : "down",
+    },
   });
 });
 
