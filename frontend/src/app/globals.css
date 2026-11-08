@@ -148,3 +148,16 @@ to maintain a single source of truth for our design tokens, which can be used bo
     @apply qb-tag border border-qb-muted text-qb-muted;
   }
 }
+@layer components {
+  /* ---  NAV LINK (animated gold/magenta underline)  --- */
+  .qb-nav-link {
+    @apply relative inline-block text-[11px] font-medium uppercase tracking-[0.18em] text-qb-ink transition-colors duration-300 hover:text-qb-magenta;
+  }
+  .qb-nav-link::after {
+    content: "";
+    @apply absolute -bottom-1 left-0 h-px w-0 bg-qb-magenta transition-all duration-300;
+  }
+  .qb-nav-link:hover::after {
+    @apply w-full;
+  }
+}
