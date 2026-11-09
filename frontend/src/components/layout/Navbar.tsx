@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Shop", href: "/shop" },
@@ -72,15 +73,17 @@ export default function Navbar() {
             </ul>
           </div>
 
-          {/* Center — wordmark */}
+          {/* Center — logo */}
           <div className="flex justify-center">
-            <Link href="/" className="group inline-flex flex-col items-center leading-none">
-              <span className="font-display text-xl font-light uppercase tracking-[0.3em] text-qb-ink md:text-2xl">
-                Queen&nbsp;Bee
-              </span>
-              <span className="mt-1 text-[8px] font-medium uppercase tracking-[0.35em] text-qb-gold-deep">
-                Kathmandu
-              </span>
+            <Link href="/" aria-label="Queen Bee — home" className="inline-flex items-center">
+              <Image
+                src="/queen-bee-logo.png"
+                alt="Queen Bee"
+                width={252}
+                height={256}
+                priority
+                className="h-11 w-auto md:h-14"
+              />
             </Link>
           </div>
 
@@ -125,10 +128,14 @@ export default function Navbar() {
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between border-b border-qb-line px-6 py-5">
-            <span className="font-display text-lg uppercase tracking-[0.25em] text-qb-ink">
-              Queen&nbsp;Bee
-            </span>
+          <div className="flex items-center justify-between border-b border-qb-line px-6 py-4">
+            <Image
+              src="/queen-bee-logo.png"
+              alt="Queen Bee"
+              width={252}
+              height={256}
+              className="h-9 w-auto"
+            />
             <button
               type="button"
               aria-label="Close menu"
